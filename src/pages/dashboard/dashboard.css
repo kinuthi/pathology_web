@@ -1,0 +1,7 @@
+.dashboard {
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-evenly;
+    /* border: 1px solid red; */
+}
+
