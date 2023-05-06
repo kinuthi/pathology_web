@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {  useNavigate } from "react-router-dom";
+import {  useNavigate,Link } from "react-router-dom";
 
 const Container = styled.div`
 	position: fixed;
@@ -112,7 +112,7 @@ const Text = styled.span`
 
 const Profile = styled.div`
 	width: ${(props) => (props.clicked ? '14rem' : '3rem')};
-	height: 2rem;
+	height: 3rem;
 	padding: 0.5rem 1rem;
 	/* border: 2px solid var(--white); */
 	border-radius: 20px;
@@ -221,7 +221,8 @@ const Sidebar = () => {
 					<Details clicked={profileClick}>
 						<Name>
 							<h4>Jhon&nbsp;Doe</h4>
-							<a href='/#'>view&nbsp;profile</a>
+							<Link to="/profile">view&nbsp;profile</Link>
+							
 						</Name>
 
 						<Logout>

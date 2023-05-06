@@ -1,6 +1,6 @@
 
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import {
 
@@ -11,12 +11,12 @@ import {
 
 
 function ForgotPassword() {
-//   const navigate = useNavigate;
+
+ const navigate = useNavigate;
 
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
     },
     validate: (values) => {
       const errors = {};
@@ -31,10 +31,14 @@ function ForgotPassword() {
     },
     onSubmit: (values) => {
       console.log(values);
+      navigate('/change');
       alert(JSON.stringify(values, null, 2));
     },
   });
 
+  function handleClick() {
+    navigate('/new-page');
+  }
   return (
     <div className="formDiv">
       <form onSubmit={formik.handleSubmit} className="formmain">
@@ -42,7 +46,7 @@ function ForgotPassword() {
         <FaUserLock size={50} />
           </div>
         <span className="headingtag">Reset Password</span>
-
+        <button onClick={handleClick}>Go to new page</button>
         <label htmlFor="email"></label>
         <input
           id="email"
