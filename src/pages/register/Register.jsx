@@ -61,12 +61,21 @@ const RegisterForm = () => {
       lastName: "",
       email: "",
       password: "",
+      isAdmin:false
     },
     validate,
     onSubmit: (values) => {
-      dispatch(RegisterUser(values))
+      console.log('values', values)
+      const payload = {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        email: values.email,
+        password: values.password,
+        isAdmin:false
+      }
+       dispatch(RegisterUser(payload))
       // navigate("/");
-      window.location.href = '/login';
+     // window.location.href = '/login';
     },
   });
 
