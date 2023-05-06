@@ -45,6 +45,7 @@ function Login() {
     onSubmit: (values) => {
       dispatch(loginUser(values))
       // navigate("/");
+      window.location.href = '/';
     },
   });
 
@@ -53,7 +54,8 @@ function Login() {
       setErr(message);
     }
     if (isSuccess || user) {
-      navigate("/");
+      //navigate("/");
+      window.location.href = '/';
     }
    dispatch(reset());
   }, [isSuccess, user, isError, message, navigate, dispatch]);

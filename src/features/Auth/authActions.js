@@ -10,7 +10,7 @@ export const RegisterUser = createAsyncThunk(
         rejectWithValue
     }) => {
         try {
-            // console.log(userDetails);
+             console.log('nice',userDetails);
              const response = await axios.post('http://localhost:3003/api/users', userDetails)
            
 
