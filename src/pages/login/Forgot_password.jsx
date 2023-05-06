@@ -31,7 +31,8 @@ function ForgotPassword() {
     },
     onSubmit: (values) => {
       console.log(values);
-      navigate('/change');
+      window.location.href = '/';
+      // navigate("change");
       alert(JSON.stringify(values, null, 2));
     },
   });
