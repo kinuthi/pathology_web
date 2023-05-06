@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {  useNavigate,Link } from "react-router-dom";
+import {  FaUser } from "react-icons/fa";
 
 const Container = styled.div`
 	position: fixed;
@@ -217,7 +218,8 @@ const Sidebar = () => {
 				</SlickBar>
 
 				<Profile clicked={profileClick}>
-					<img onClick={() => handleProfileClick()} src='https://picsum.photos/200'  alt='Profile' />
+				<FaUser onClick={() => handleProfileClick()} />
+				
 					<Details clicked={profileClick}>
 						<Name>
 							<h4>Jhon&nbsp;Doe</h4>
