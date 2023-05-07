@@ -1,13 +1,31 @@
 
-import { FaSignInAlt, FaUser } from "react-icons/fa";
+import { FaSignInAlt, FaUser , FaSignOutAlt } from "react-icons/fa";
 
-import { Link, } from "react-router-dom";
+
+import { Link, useNavigate, } from "react-router-dom";
 
 import "./Header.css";
-// import Avvvatars from 'avvvatars-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../features/Auth/authActions';
+import { reset } from '../../features/Auth/authSlice';
+
 
 
 function Header() {
+
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    dispatch(reset());
+    navigate('/login');
+  
+  };
+
+
+
 
   return (
     <div className="header hidden-print">
@@ -18,29 +36,32 @@ function Header() {
         </Link>
       </div>
       <ul className="links">
-         {/* <Avvvatars email={'mike'} /> */}
-{/*    
+         {user &&
           <li>
-            <button className="btn"  id="logout--btn">
-              <FaSignOutAlt />
-              logout
-            </button>
-          </li> */}
+                 <Link  onClick={handleLogout} id="logout--btn">
+                {" "}
+                <FaSignOutAlt />
+                logout
+              </Link>
+       
+          </li>
+          }
  
           <>
-            <li>
-              
+          {!user &&
+            <><li>
+
               <Link to="login">
                 {" "}
                 <FaSignInAlt />
                 Login
               </Link>
-            </li>
-            <li>
-              <Link to="register">
-                <FaUser /> Register
-              </Link>
-            </li>
+            </li><li>
+                <Link to="register">
+                  <FaUser /> Register
+                </Link>
+              </li></>
+         }
           </>
    
       </ul>

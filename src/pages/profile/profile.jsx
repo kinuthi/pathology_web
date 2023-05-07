@@ -1,5 +1,7 @@
+import { useSelector } from 'react-redux';
 
 function  Profile() {
+  const { user } = useSelector((state) => state.auth);
     return(
 <div className="bg-white md:mx-auto rounded shadow-xl w-full md:w-1/2 overflow-hidden" style={{marginTop:'30px'}}>
   <div className="h-[140px] bg-gradient-to-r from-black "></div>
@@ -8,8 +10,8 @@ function  Profile() {
    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" className="w-full h-full rounded-full object-center object-cover"/>
    </div>
     <div className="">
-      <h3 className="text-xl text-slate-900 relative font-bold leading-6">Dadda Hicham</h3>
-      <p className="text-sm text-gray-600">@michael@bingwa.ke</p>
+      <h3 className="text-xl text-slate-900 relative font-bold leading-6">{user?.first_name} {user?.last_name}</h3>
+      <p className="text-sm text-gray-600">{user?.emails}</p>
     </div>
     <div className="flex gap-3 flex-wrap"><span className="rounded-sm bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-800">Developer</span><span className="rounded-sm bg-green-100 px-3 py-1 text-xs font-medium text-green-800">Design</span><span className="rounded-sm bg-blue-100 px-3 py-1 text-xs font-medium text-blue-800">Managements</span><span className="rounded-sm bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-800">Projects</span></div>
     <div className="flex gap-2">

@@ -10,7 +10,7 @@ import {
 
 
 function ChangePassword() {
-//   const navigate = useNavigate;
+ //const navigate = useNavigate;
 
   const formik = useFormik({
     initialValues: {
