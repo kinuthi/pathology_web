@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import "./Register.css";
 // import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Spinner from '../../components/spinner/Spinner';
 import {
@@ -37,11 +37,7 @@ const validate = (values) => {
   } else if (values.password.length <= 8) {
     errors.password = "Must be 8 characters or more";
   }
-  // if (!values.confirmPassword) {
-  //   errors.confirmPassword = "* Password should match";
-  // } else if (values.password != values.confirmPassword) {
-  //   errors.confirmPassword = "Does not match password";
-  // }
+
 
   return errors;
 };
@@ -49,7 +45,7 @@ const validate = (values) => {
 const RegisterForm = () => {
 
   const dispatch =  useDispatch()
-  // const navigate = useNavigate();
+   const navigate = useNavigate();
   const [err, setErr] = useState("");
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
@@ -74,8 +70,7 @@ const RegisterForm = () => {
         isAdmin:false
       }
        dispatch(RegisterUser(payload))
-      // navigate("/");
-     // window.location.href = '/login';
+       navigate("/");
     },
   });
 
@@ -84,8 +79,7 @@ const RegisterForm = () => {
       setErr(message);
     }
     if (isSuccess || user) {
-      //navigate("/");
-      window.location.href = '/login';
+      navigate("/");
     }
    dispatch(reset());
   }, [isSuccess, user, isError, message, dispatch]);
@@ -160,16 +154,7 @@ const RegisterForm = () => {
           {formik.touched.password && formik.errors.password ? (
             <div className="errors">{formik.errors.password}</div>
           ) : null}
-          {/* <input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            placeholder="Confirm Password"
-            {...formik.getFieldProps('confirmPassword')}
-          />
-          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-            <div className="errors">{formik.errors.confirmPassword}</div>
-          ) : null} */}
+
 
           <button type="submit" id="btn">
             Register

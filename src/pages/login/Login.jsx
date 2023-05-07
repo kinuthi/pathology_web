@@ -8,7 +8,7 @@ import {
     FaUserLock,
   
   } from "react-icons/fa";
-import { useDispatch, useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../features/Auth/authActions';
 import { useEffect, useState } from 'react';
 import { reset } from '../../features/Auth/authSlice';
@@ -17,8 +17,8 @@ import Spinner from '../../components/spinner/Spinner';
 
 
 function Login() {
-  const dispatch =  useDispatch()
-  const navigate = useNavigate;
+  const dispatch =  useDispatch();
+  const navigate = useNavigate();
   const [err, setErr] = useState("");
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
@@ -44,8 +44,8 @@ function Login() {
     },
     onSubmit: (values) => {
       dispatch(loginUser(values))
-      // navigate("/");
-      window.location.href = '/';
+      navigate("/");
+   
     },
   });
 
@@ -54,8 +54,7 @@ function Login() {
       setErr(message);
     }
     if (isSuccess || user) {
-      //navigate("/");
-      window.location.href = '/';
+      navigate("/");
     }
    dispatch(reset());
   }, [isSuccess, user, isError, message, navigate, dispatch]);

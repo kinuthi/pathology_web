@@ -1,6 +1,9 @@
+import { useSelector } from 'react-redux';
 
 
 const Blogs =()=>{
+    const { user } = useSelector((state) => state.auth);
+    console.log(user);
     return(
              
 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -54,9 +57,11 @@ const Blogs =()=>{
                 <th scope="col" className="px-6 py-3">
                     Status
                 </th>
+                {user?.isAdmin==true && 
                 <th scope="col" className="px-6 py-3">
                     Action
                 </th>
+               }
             </tr>
         </thead>
         <tbody>
@@ -77,10 +82,11 @@ const Blogs =()=>{
                    <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Published
                </div>
            </td>
+           {user?.isAdmin==true && 
            <td className="px-6 py-4">
            
-               <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-           </td>
+               <a href="#" type="button"   data-modal-target="editUserModal" data-modal-show="editUserModal" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+           </td>}
        </tr>
        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
            
@@ -99,10 +105,12 @@ const Blogs =()=>{
                    <div className="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Draft
                </div>
            </td>
+           {user?.isAdmin==true && 
            <td className="px-6 py-4">
-           
-               <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-           </td>
+               
+               <a href="#" type="button" disabled={user.isAdmin == false}  data-modal-target="editUserModal" data-modal-show="editUserModal" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+           </td>}
+
        </tr>
             
         </tbody>
