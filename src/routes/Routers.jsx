@@ -9,11 +9,11 @@ import Users from '../pages/users/Users';
 import Blogs from '../pages/blogs/blogs';
 import ChangePassword from '../pages/login/change_password';
 import Profile from '../pages/profile/profile';
+import Private from '../components/Layout/Guard/private';
 
 function Routers() {
 	return (
 		<Routes>
-        
 			<Route path='/' element={<Index />}>
 				<Route path='login' element={<Login />} />
 				<Route path='register' element={<RegisterForm />} />
@@ -21,16 +21,14 @@ function Routers() {
 				<Route path='change' element={<ChangePassword />} />
 			
         
-				<Route path='/' element={<Home />}>
-					<Route index element={<Dashboard/>}/>
-					<Route path='users' element={<Users/>}/>
-					<Route path='blogs' element={<Blogs/>}/>
-					<Route path='profile' element={<Profile />} />
+				<Route path='/' element={<Private><Home /></Private>}>
+					<Route index element={<Private><Dashboard/></Private>}/>
+					<Route path='users' element={<Private><Users/></Private>}/>
+					<Route path='blogs' element={<Private><Blogs/></Private>}/>
+					<Route path='profile' element={<Private><Profile /></Private>} />
 				</Route>
-			</Route>
-      
+			</Route>      
 		</Routes>
 	);
 }
-
 export default Routers;

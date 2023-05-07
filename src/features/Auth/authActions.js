@@ -10,8 +10,26 @@ export const RegisterUser = createAsyncThunk(
         rejectWithValue
     }) => {
         try {
-             console.log('nice',userDetails);
+       
              const response = await axios.post('http://localhost:3003/api/users', userDetails)
+           
+
+            return response.data
+        } catch (error) {
+            return rejectWithValue(error.response ? error.response.data.message : error.message || error.toString())
+        }
+
+    }
+)
+
+export const ResetPassword = createAsyncThunk(
+    "authUser/resetPassword",
+    async (userDetails, {
+        rejectWithValue
+    }) => {
+        try {
+
+             const response = await axios.post('http://localhost:3003/api/users/reset', userDetails)
            
 
             return response.data

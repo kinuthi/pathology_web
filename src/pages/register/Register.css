@@ -31,6 +31,7 @@
     /* border: 2px solid red; */
     background-color: rgba(255, 255, 255, 0.848);
     transform: scaleX(1.05);
+    /* transform: scaleY(0.9); */
     border: 1px solid rgba(255, 255, 255, 0.125);
   }
   .formmain input {
@@ -96,4 +97,21 @@
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 16px;
+  }
+  .password-fields{
+    position: relative;
+    /* width: max-content; */
+    /* border: 1px solid red; */
+  }
+  
+  .password-fields input {
+    padding-right: 40px; 
+  }
+  
+  .password-toggle-icons {
+    position: absolute;
+    top: 55%;
+    right: 1rem;
+    transform: translateY(-50%);
+    cursor: pointer;
   }

@@ -25,3 +25,18 @@
     font-size: 12px;
     /* border: 1px solid red; */
   }
+  .password-field {
+    position: relative;
+  }
+  
+  .password-field input {
+    padding-right: 20px;
+  }
+  
+  .password-toggle-icon {
+    position: absolute;
+    top: 55%;
+    right: 2.5rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }

@@ -29,7 +29,8 @@ function ForgotPassword() {
       }
       return errors;
     },
-    onSubmit: () => {
+    onSubmit: (values) => {
+      localStorage.setItem('myEmail', values.email);
       navigate("/change");
     },
   });

@@ -1,6 +1,6 @@
 
 import { useFormik } from "formik";
-import {  useNavigate } from "react-router-dom";
+import {  useNavigate, useLocation} from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import {
@@ -13,18 +13,23 @@ import { loginUser } from '../../features/Auth/authActions';
 import { useEffect, useState } from 'react';
 import { reset } from '../../features/Auth/authSlice';
 import Spinner from '../../components/spinner/Spinner';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
   
 
 
 function Login() {
   const dispatch =  useDispatch();
   const navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const [err, setErr] = useState("");
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
 
- 
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const formik = useFormik({
     initialValues: {
@@ -44,7 +49,7 @@ function Login() {
     },
     onSubmit: (values) => {
       dispatch(loginUser(values))
-      navigate("/");
+      // navigate("/");
    
     },
   });
@@ -54,10 +59,10 @@ function Login() {
       setErr(message);
     }
     if (isSuccess || user) {
-      navigate("/");
+      navigate(from, {replace: true});
     }
    dispatch(reset());
-  }, [isSuccess, user, isError, message, navigate, dispatch]);
+  }, [isSuccess, user, isError, message, navigate, dispatch, from]);
 
   if (isLoading) {
     return <Spinner />;
@@ -98,15 +103,21 @@ function Login() {
         {formik.touched.email && formik.errors.email ? (
           <div className="errors">{formik.errors.email}</div>
         ) : null}
-        <input
+       <input
           id="password"
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Enter Password"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
         />
+      <div
+    className="password-toggle-icon"
+    onClick={() => setShowPassword(!showPassword)}
+     >
+               {showPassword ? <FaEyeSlash /> : <FaEye />}
+         </div>
      
           <Link className="forgot" to='/reset'>
           Forgot Password?</Link>
