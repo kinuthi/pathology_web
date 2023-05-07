@@ -12,6 +12,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { RegisterUser } from '../../features/Auth/authActions';
 import { reset } from '../../features/Auth/authSlice';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 const validate = (values) => {
   const errors = {};
@@ -36,6 +38,10 @@ const validate = (values) => {
     errors.password = "* Required";
   } else if (values.password.length <= 8) {
     errors.password = "Must be 8 characters or more";
+  } if (!values.confirmPassword) {
+    errors.confirmPassword = "* Password should match";
+  } else if (values.password != values.confirmPassword) {
+    errors.confirmPassword = "Does not match password";
   }
 
 
@@ -47,6 +53,7 @@ const RegisterForm = () => {
   const dispatch =  useDispatch()
    const navigate = useNavigate();
   const [err, setErr] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
@@ -70,7 +77,7 @@ const RegisterForm = () => {
         isAdmin:false
       }
        dispatch(RegisterUser(payload))
-       navigate("/");
+      // navigate("/");
     },
   });
 
@@ -79,10 +86,10 @@ const RegisterForm = () => {
       setErr(message);
     }
     if (isSuccess || user) {
-      navigate("/");
+      navigate("/login");
     }
    dispatch(reset());
-  }, [isSuccess, user, isError, message, dispatch]);
+  }, [isSuccess, user, isError, message, dispatch, navigate]);
 
 
   if (isLoading) {
@@ -144,18 +151,45 @@ const RegisterForm = () => {
           {formik.touched.email && formik.errors.email ? (
             <div className="errors">{formik.errors.email}</div>
           ) : null}
+          <div className="password-fields">
           <input
             id="password"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Create Password"
             {...formik.getFieldProps('password')}
           />
+          <div
+          className="password-toggle-icons"
+             onClick={() => setShowPassword(!showPassword)}
+               >
+               {showPassword ? <FaEyeSlash /> : <FaEye />}
+         </div>
+
+          </div>
           {formik.touched.password && formik.errors.password ? (
             <div className="errors">{formik.errors.password}</div>
           ) : null}
+  <div className="password-fields">
 
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type={showPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            {...formik.getFieldProps('confirmPassword')}
+          />
+          <div
+          className="password-toggle-icons"
+             onClick={() => setShowPassword(!showPassword)}
+               >
+               {showPassword ? <FaEyeSlash /> : <FaEye />}
+         </div>
+  </div>
 
+          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+            <div className="errors">{formik.errors.confirmPassword}</div>
+          ) : null}
           <button type="submit" id="btn">
             Register
           </button>

@@ -19,10 +19,6 @@ const Dashboard =()=>{
         <Card/>
         <Card/>
         <Card/>
-
-
-
-
         </section>
         
 

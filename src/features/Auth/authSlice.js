@@ -4,7 +4,8 @@ import {
 import {
     loginUser,
     logoutUser,
-    RegisterUser
+    RegisterUser,
+    ResetPassword
 } from "./authActions";
 
 const user = JSON.parse(localStorage.getItem('user'))
@@ -61,6 +62,20 @@ export const authSlice = createSlice({
             }),
             builder.addCase(logoutUser.fulfilled, (state, action) => {
                 state.user = null
+            }),
+            builder.addCase(ResetPassword.fulfilled,(state,action)=>{
+                state.isLoading = false
+                state.isSuccess = true 
+            }),
+            builder.addCase(ResetPassword.pending,(state,action)=>{
+                state.isLoading = true
+                state.isSuccess = false 
+            })
+            builder.addCase(ResetPassword.rejected,(state,action)=>{
+                state.isLoading = false
+                state.isSuccess = false 
+                state.isError = true
+                state.message = action.payload
             })
     }
 })

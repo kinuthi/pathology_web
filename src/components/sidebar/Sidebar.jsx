@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 const Container = styled.div`
 	position: fixed;
+	z-index: 50;
 	.active {
 		border-right: 4px solid var(--white);
 		img {

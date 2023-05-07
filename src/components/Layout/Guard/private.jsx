@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 
-function Private() {
+function Private({children}) {
 
    const { user } = useSelector((state) => state.auth)
 
-  if (!user)
+  if (user) return children
 
   return <Navigate to='/login' />
 }
